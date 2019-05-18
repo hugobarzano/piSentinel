@@ -3,7 +3,7 @@
 Face learning and searching example
 
 
-###Usage
+### Usage
 
         Usage::
             python3  piSentinel.py -h shows this help()
@@ -13,7 +13,7 @@ Face learning and searching example
         Info:: 
             Press Key 'q' to exit camera frame and save data learning
             
-###Dependencies
+### Dependencies
 
          python3 [Download](https://www.python.org/downloads/)
          pip3 install -R requirements.txt
