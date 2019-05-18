@@ -16,6 +16,6 @@ Face learning and searching example
 ### Dependencies
 
          python3 [Download](https://www.python.org/downloads/)
-         pip3 install -R requirements.txt
+         pip3 install -r requirements.txt
 
 
