@@ -15,7 +15,7 @@ def usage():
         Usage::
             python3  piSentinel.py -h shows this help()
             python3  piSentinel.py -t <face_name>  to make piSentinel learn your face
-            python3  piSentinel.py -s              to make piSentinel search some know face
+            python3  piSentinel.py -s              to make piSentinel search some known face
             
         Info:: 
             Press Key 'q' to exit camera frame and save data learning
@@ -24,6 +24,7 @@ def usage():
 
 def learn(name):
     video_capture = cv2.VideoCapture(0)
+    face_counter = 0
     while True:
         ret, frame = video_capture.read()
         cv2.imshow("PiSentinel Learning your Face", frame)
@@ -37,8 +38,9 @@ def learn(name):
                 top, right, bottom, left = face_location
                 print("Face detected at Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
                 face_image = frame[top:bottom, left:right]
-                image_name = name + "_" + str(time.strftime("%Y%m%d%H%M")) + '.jpg'
+                image_name = name + "_N"+str(face_counter) + str(time.strftime("_%Y%m%d%H%M")) + '.jpg'
                 cv2.imwrite(DATA_FOLDER + image_name, face_image)
+                face_counter += 1
                 Image.fromarray(face_image).show(title=image_name)
 
             break
@@ -52,6 +54,9 @@ def search():
     known_face_names = []
 
     directory = os.fsencode(DATA_FOLDER)
+
+    if len(os.listdir(directory)) == 1: print("You have not teach me any faces yet!");usage();exit(0);
+
 
     for file in os.listdir(directory):
         filename = os.fsdecode(file)

@@ -7,8 +7,8 @@ Face learning and searching example
 
         Usage::
             python3  piSentinel.py -h shows this help()
-            python3  piSentinel.py -t <face_name>  to make piSentinel learn your face
-            python3  piSentinel.py -s              to make piSentinel search some know faces
+            python3  piSentinel.py -t <face_name>  to teach your face to piSentinel
+            python3  piSentinel.py -s              to make piSentinel search some known faces
             
         Info:: 
             Press Key 'q' to exit camera frame and save data learning
