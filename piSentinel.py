@@ -43,14 +43,12 @@ def learn(name):
                     print("Face detected at Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
                     face_image = original_frame[top:bottom, left:right]
                     image_name = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S"))+"v0"+'.jpg'
-                    original_image_data = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S"))+"v1"+'.jpg'
                     cv2.imwrite(DATA_FOLDER + image_name, face_image)
-                    cv2.imwrite(DATA_FOLDER + original_image_data, original_frame)
-
                     face_counter += 1
                     Image.fromarray(face_image).show(title=image_name)
+                original_image_data = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S")) + "v1" + '.jpg'
+                cv2.imwrite(DATA_FOLDER + original_image_data, original_frame)
                 break
-
             for face_location in face_locations:
                 top, right, bottom, left = face_location
                 cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
