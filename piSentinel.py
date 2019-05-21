@@ -159,6 +159,7 @@ def main(argv):
         opts, args = getopt.getopt(argv,"ht:s")
     except getopt.GetoptError:
         print ('python3 piSentinel.py -h')
+        usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
