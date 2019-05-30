@@ -23,23 +23,29 @@ Face learning and searching example
          
 ### Example
 
-Let´s go to teach pySentinel Hugo´s face:
+Let's go to teach Hugo's face to piSentinel:
 
     python3  piSentinel.py -t Hugo
     
  ![Hugo](https://github.com/hugobarzano/piSentinel/blob/master/img/doc_hugo.png "Hugo")
  
  
- When cam start recording and reconice the face pres Q to make piSentinel learnt the face. 
- Learned feaces will be save inside img/ folder. 
+When cam start recording and recognize the face press Q to make piSentinel to learn the face.
+Learned faces will be saved inside img/ folder.
  
- Let´s go to search about learnd feace:
+Let's go to search some face:
  
-  ![Ramones](c/common/images/icon48.png "Ramones Tablet")
+    python3 piSentinel.py -s  
+ 
+ 
+Faces known by piSentinel will be labeled with their name:
+
+  ![Crazzy Hugo](https://github.com/hugobarzano/piSentinel/blob/master/img/doc_hugo2.png "Crazzy Hugo")
 
  
+Faces not known by piSentinel will be labeled with unknown
 
-
+  ![Jim Morrison](https://github.com/hugobarzano/piSentinel/blob/master/img/doc_jim.png "Jim Morrison")
 
 
 
