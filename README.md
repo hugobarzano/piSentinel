@@ -27,7 +27,7 @@ Let´s go to teach pySentinel Hugo´s face:
 
     python3  piSentinel.py -t Hugo
     
- ![Hugo](c/common/images/icon48.png "Joey Ramone Tablet")
+ ![Hugo](https://github.com/hugobarzano/piSentinel/blob/master/img/doc_hugo.png "Hugo")
  
  
  When cam start recording and reconice the face pres Q to make piSentinel learnt the face. 
