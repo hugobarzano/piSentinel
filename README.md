@@ -15,7 +15,31 @@ Face learning and searching example
             
 ### Dependencies
 
-         python3 [Download](https://www.python.org/downloads/)
+   python3 [Download](https://www.python.org/downloads/)
+   
+         virtualenv <env_name>
+         source <env_name>/bin/activate
          pip3 install -r requirements.txt
+         
+### Example
+
+Let´s go to teach pySentinel Hugo´s face:
+
+    python3  piSentinel.py -t Hugo
+    
+ ![Hugo](c/common/images/icon48.png "Joey Ramone Tablet")
+ 
+ 
+ When cam start recording and reconice the face pres Q to make piSentinel learnt the face. 
+ Learned feaces will be save inside img/ folder. 
+ 
+ Let´s go to search about learnd feace:
+ 
+  ![Ramones](c/common/images/icon48.png "Ramones Tablet")
+
+ 
+
+
+
 
 

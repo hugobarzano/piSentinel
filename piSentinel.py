@@ -27,11 +27,8 @@ def learn(name):
     face_counter = 0
     while True:
         ret, frame = video_capture.read()
-        original_frame = frame
-
-        cv2.imshow("PiSentinel Learning your Face", frame)
-
-        face_locations = face_recognition.face_locations(frame)
+        small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+        face_locations = face_recognition.face_locations(small_frame)
 
         if len(face_locations)==0:
             print("Looking for Faces...")
@@ -41,27 +38,31 @@ def learn(name):
                 for face_location in face_locations:
                     top, right, bottom, left = face_location
                     print("Face detected at Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
-                    face_image = original_frame[top:bottom, left:right]
+                    face_image = small_frame[top:bottom, left:right]
                     image_name = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S"))+"v0"+'.jpg'
                     cv2.imwrite(DATA_FOLDER + image_name, face_image)
                     face_counter += 1
                     Image.fromarray(face_image).show(title=image_name)
                 original_image_data = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S")) + "v1" + '.jpg'
-                cv2.imwrite(DATA_FOLDER + original_image_data, original_frame)
+                smalll_image_data = name + "_N" + str(face_counter) + str(time.strftime("_%Y%m%d%H%M%S")) + "v2" + '.jpg'
+                cv2.imwrite(DATA_FOLDER + original_image_data, frame)
+                cv2.imwrite(DATA_FOLDER + smalll_image_data, small_frame)
                 break
+
             for face_location in face_locations:
                 top, right, bottom, left = face_location
-                cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                cv2.rectangle(small_frame, (left, top), (right, bottom), (0, 0, 255), 1)
+                #cv2.rectangle(small_frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
                 font = cv2.FONT_HERSHEY_DUPLEX
                 print("Face detected at Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
-                cv2.putText(frame, name+"?", (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-
-            cv2.imshow("PPiSentinel Learning your Face", frame)
+                cv2.putText(small_frame, name+"?", (left + 6, bottom - 6), font, 0.4, (255, 255, 255), 1)
+        show_frame = cv2.resize(small_frame, (0, 0), fx=4, fy=4)
+        cv2.imshow("piSentinel Learning your Face", show_frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
     video_capture.release()
     cv2.destroyAllWindows()
-
 
 def search():
     known_face_encodings = []
@@ -74,21 +75,20 @@ def search():
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".jpg"):
-            print("Loading and Learning: "+os.path.join(DATA_FOLDER, filename))
+            print("Loading and Learning: " + os.path.join(DATA_FOLDER, filename))
             input_image = face_recognition.load_image_file(os.path.join(DATA_FOLDER, filename))
             try:
                 input_face_encoding = face_recognition.face_encodings(input_image)[0]
                 known_face_encodings.append(input_face_encoding)
                 known_face_names.append(filename.split(".")[0])
             except IndexError:
-                print("No FACE FOUND in FILE: "+filename)
+                print("No FACE FOUND in FILE: " + filename)
                 known_face_encodings.append(input_image)
                 known_face_names.append(filename.split(".")[0])
             continue
         else:
-            print("NOT Supported input: "+os.path.join(DATA_FOLDER, filename))
+            print("NOT Supported input: " + os.path.join(DATA_FOLDER, filename))
             continue
-
 
     # Initialize
     face_locations = []
@@ -136,11 +136,9 @@ def search():
 
             # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-            # Draw a label with a name below the face
-            cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            single_name = name.split("_N", 1)[0]
+            cv2.putText(frame, single_name, (left + 6, bottom - 6), font, 0.7, (255, 255, 255), 1)
 
         cv2.imshow("PiSentinel Searching for Faces", frame)
 
@@ -151,6 +149,7 @@ def search():
     # Release handle to the webcam
     video_capture.release()
     cv2.destroyAllWindows()
+
 
 def main(argv):
 
