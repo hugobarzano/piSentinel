@@ -116,12 +116,10 @@ def search():
             for face_encoding in face_encodings:
                 matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
                 name = "Unknown"
-
                 face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
-
                 face_names.append(name)
 
         process_this_frame = not process_this_frame
