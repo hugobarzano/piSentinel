@@ -1,6 +1,6 @@
 # piSentinel
 
-Face learning and searching example based on [@ageitgey/face_recognitio](https://github.com/ageitgey/face_recognition) 
+Face learning and searching example based on [@ageitgey/face_recognition](https://github.com/ageitgey/face_recognition) 
 
 
 ### Usage
